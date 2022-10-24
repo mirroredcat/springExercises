@@ -11,5 +11,7 @@ public interface TrainingService {
 
     public String getWelcomeMessage();
     public List<Course> showFollowedCourses(Person p);
-    public void enrollForSession(Person p, Course c, LocalDate date) throws EnrollException;
+    public String enrollForSession(Person p, Course c, LocalDate date) throws EnrollException;
+    public PersonService getPs();
+    public CourseService getCs();
 }

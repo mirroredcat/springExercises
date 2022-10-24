@@ -28,6 +28,14 @@ public class AbisTrainingService  implements TrainingService{
         this.cs = cs;
     }
 
+    public PersonService getPs() {
+        return ps;
+    }
+
+    public CourseService getCs() {
+        return cs;
+    }
+
     @PostConstruct
     public void init(){
         System.out.println("AbisTrainingService is ready for work");
@@ -47,7 +55,11 @@ public class AbisTrainingService  implements TrainingService{
     }
 
     @Override
-    public void enrollForSession(Person p, Course c, LocalDate date) throws EnrollException {
-
+    public String enrollForSession(Person p, Course c, LocalDate date) throws EnrollException {
+        if (!date.isBefore(LocalDate.now())) {
+            return (p.getFirstName() + " is now enrolled for the " + c.getShortTitle() + " course on " + date);
+        } else {
+            throw new EnrollException("Can't enroll for courses in the past");
+        }
     }
 }

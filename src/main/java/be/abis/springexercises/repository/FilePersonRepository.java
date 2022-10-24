@@ -33,6 +33,7 @@ public class FilePersonRepository implements PersonRepository {
 
 	}
 
+	//needed so that the value injection could happen first
 	@PostConstruct
 	public void setUp(){
 		allPersons = new ArrayList<Person>();

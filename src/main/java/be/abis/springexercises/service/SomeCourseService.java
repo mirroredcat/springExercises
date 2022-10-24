@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-@Qualifier("fallback")
+@Qualifier("someCourseService")
 public class SomeCourseService implements CourseService{
 
 
