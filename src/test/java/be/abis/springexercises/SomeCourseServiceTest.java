@@ -1,6 +1,5 @@
 package be.abis.springexercises;
 
-import be.abis.springexercises.repository.CourseRepository;
 import be.abis.springexercises.service.CourseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,20 +9,15 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
-public class AbisCourseServiceTest {
+public class SomeCourseServiceTest {
 
     @Autowired
-    @Qualifier("abis")        
-    CourseService acr;
+    @Qualifier("fallback")
+    CourseService cs;
 
     @Test
-    void courseWithId7900IsFound(){
-        assertEquals(acr.findCourse(7900).getShortTitle(), "Workshop SQL");
-    }
-
-    @Test
-    void returns2CoursesUnder500(){
-        assertEquals(acr.getCoursesCheaperThan500().size(),2);
+    public void testCourseIsReturned(){
+        assertEquals(cs.findCourse(7900).getLongTitle(), "TestCourse");
     }
 
 }

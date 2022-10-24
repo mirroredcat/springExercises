@@ -52,7 +52,5 @@ public class Course {
 		this.pricePerDay = pricePerDay;
 	}
 
-	
 
-	
 }

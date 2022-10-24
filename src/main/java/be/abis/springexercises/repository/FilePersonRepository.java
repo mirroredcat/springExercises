@@ -4,19 +4,37 @@ package be.abis.springexercises.repository;
 import be.abis.springexercises.model.Address;
 import be.abis.springexercises.model.Company;
 import be.abis.springexercises.model.Person;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnResource;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
+import javax.annotation.PostConstruct;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-@Component
+@Repository
+@ConditionalOnResource(resources="file:${path.url}")
 public class FilePersonRepository implements PersonRepository {
 
+	//@Autowired
+	//private Environment env;
+
 	private ArrayList<Person> allPersons;
-	private String fileLoc = "/temp/javacourses/personsSpring.csv";
+	//private String fileLoc = env.getProperty("path.url");
+	@Value("${path.url}")
+	private String fileLoc="";
 
 	public FilePersonRepository() {
+
+	}
+
+	@PostConstruct
+	public void setUp(){
 		allPersons = new ArrayList<Person>();
 		this.readFile();
 	}
@@ -32,6 +50,7 @@ public class FilePersonRepository implements PersonRepository {
 			allPersons.clear();
 		BufferedReader br = null;
 		try {
+			System.out.println(fileLoc);
 			br = new BufferedReader(new FileReader(fileLoc));
 			String s = null;
 			while ((s = br.readLine()) != null) {
@@ -83,7 +102,6 @@ public class FilePersonRepository implements PersonRepository {
 		}
 
 		this.readFile();
-		// System.out.println("persons in PersonList" + allPersons);
 		Iterator<Person> iter = allPersons.iterator();
 
 		while (iter.hasNext()) {
@@ -97,6 +115,7 @@ public class FilePersonRepository implements PersonRepository {
 	
 	@Override
 	public Person findPerson(int id) {
+		System.out.println("This was done from the file");
 		this.readFile();
 		return allPersons.stream().filter(p->p.getPersonId()==id).findFirst().orElse(null);
 	}

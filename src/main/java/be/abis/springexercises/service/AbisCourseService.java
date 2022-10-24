@@ -4,25 +4,43 @@ import be.abis.springexercises.exceptions.CourseNotFoundException;
 import be.abis.springexercises.model.Course;
 import be.abis.springexercises.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Component
+@Service
+@Qualifier("abis")
 public class AbisCourseService implements CourseService{
 
 
-    private CourseRepository cr;
+    //private CourseRepository cr;
+    @Autowired CourseRepository cr;
+    private List<String> coursesCheaperThan500 = new ArrayList<>();
 
     //different way to inject
+    /*
     @Autowired
-    public AbisCourseService(CourseRepository crp){
-        this.cr = crp;
+    public AbisCourseService(CourseRepository cr){
+        this.cr = cr;
     }
+
+     */
 
     @Override
     public List<Course> findAllCourses() {
         return cr.findAllCourses();
+    }
+
+    public CourseRepository getCr() {
+        return cr;
+    }
+
+    public void setCr(CourseRepository cr) {
+        this.cr = cr;
     }
 
     @Override
@@ -49,4 +67,17 @@ public class AbisCourseService implements CourseService{
     public void deleteCourse(Course c) throws CourseNotFoundException {
         cr.deleteCourse(c);
     }
+
+
+    @Value("#{memoryCourseRepository.courses.?[pricePerDay lt 500.0].![shortTitle]}")
+    public void setCoursesCheaperThan500(List<String>namesOfCheaperCourses){
+        this.coursesCheaperThan500 = namesOfCheaperCourses;
+    }
+
+    public List<String> getCoursesCheaperThan500(){
+        return coursesCheaperThan500;
+    }
+
+
+
 }

@@ -13,5 +13,6 @@ public interface CourseService {
     public void addCourse(Course c);
     public void updateCourse(Course c) throws CourseNotFoundException;
     public void deleteCourse(Course c) throws CourseNotFoundException;
+    public List<String> getCoursesCheaperThan500();
 
 }

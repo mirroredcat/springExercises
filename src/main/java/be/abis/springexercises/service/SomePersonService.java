@@ -2,57 +2,46 @@ package be.abis.springexercises.service;
 
 import be.abis.springexercises.exceptions.PersonNotFoundException;
 import be.abis.springexercises.model.Person;
-import be.abis.springexercises.repository.PersonRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 
-
-@Component
-@Profile("dev")
-public class AbisPersonService implements PersonService{
-
-    PersonRepository pr;
-
-    //different way to inject
-    @Autowired
-    public void setPr(PersonRepository pr) {
-        this.pr = pr;
-    }
-
+@Service
+@Profile("test")
+public class SomePersonService implements PersonService{
     @Override
     public List<Person> findAllPersons() {
-        return pr.getAllPersons();
+        return null;
     }
 
     @Override
     public Person findPerson(int id) {
-        return pr.findPerson(id);
+        return null;
     }
 
     @Override
     public Person findPerson(String emailAddress, String password) {
-        return pr.findPerson(emailAddress, password);
+        Person p = new Person();
+        p.setFirstName("Clau");
+        p.setEmailAddress("Clau.rules@potato.com");
+        p.setPassword("woopwoop");
+        return p;
     }
 
     @Override
     public void addPerson(Person p) throws IOException {
-        pr.addPerson(p);
+
     }
 
     @Override
     public void deletePerson(Person p) throws PersonNotFoundException {
-        pr.deletePerson(p.getPersonId());
+
     }
 
     @Override
     public void changePassword(Person p, String newPswd) throws IOException {
-        pr.changePassword(p, newPswd);
+
     }
-
-
-
 }

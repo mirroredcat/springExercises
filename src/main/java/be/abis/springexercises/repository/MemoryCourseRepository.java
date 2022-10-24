@@ -5,12 +5,13 @@ package be.abis.springexercises.repository;
 import be.abis.springexercises.exceptions.CourseNotFoundException;
 import be.abis.springexercises.model.Course;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-@Component
+@Repository
 public class MemoryCourseRepository implements CourseRepository {
 	
 	private ArrayList<Course> courses = new ArrayList<Course>();

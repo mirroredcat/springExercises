@@ -4,13 +4,14 @@ import be.abis.springexercises.exceptions.PersonNotFoundException;
 import be.abis.springexercises.model.Address;
 import be.abis.springexercises.model.Company;
 import be.abis.springexercises.model.Person;
-import be.abis.springexercises.service.AbisPersonService;
+import be.abis.springexercises.service.PersonService;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.io.IOException;
 
@@ -18,10 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
+@ActiveProfiles("dev")
 public class AbisPersonServiceTest {
 
     @Autowired
-    AbisPersonService aps;
+    PersonService aps;
 
     @Test
     void personWithID1isFound(){
