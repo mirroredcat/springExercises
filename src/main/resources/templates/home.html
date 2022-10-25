@@ -1,0 +1,15 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://thymeleaf.org">
+    <head>
+        <title>
+            My First SpringWebPage
+        </title>
+        <link th:href="@{/css/main.css}"/>
+    </head>
+    <body>
+        <h1>Course 7900 is <span th:text="${message}"></span> </h1>
+        <h2>Hi
+            <span th:text="${sayHello}"></span>
+        </h2>
+    </body>
+</html>

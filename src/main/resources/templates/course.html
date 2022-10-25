@@ -2,8 +2,12 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Course Information</title>
+	<link rel="stylesheet"th:href="@{/css/main.css}">
 </head>
 <body>
 	<h1>Title of Course 7900 is:</h1>
+<h2>
+	<span th:text="${message}"></span>
+</h2>
 </body>
 </html>
